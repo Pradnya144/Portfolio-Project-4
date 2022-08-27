@@ -26,4 +26,11 @@ class Recipes(models.Model):
         return self.title
 
 
+class Comments(models.Model):
+    recipe = models.ForeignKey(Recipe,on_delete=models.CASCADE, related_name='comment')
+    name = models.CharField(max_length=100)
+    email = models.Email.Field()
+    body = models.TextField()
+    commented_on = models.DateTimeField(auto_now=True)
 
+    
