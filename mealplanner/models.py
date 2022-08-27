@@ -18,7 +18,7 @@ class Recipes(models.Model):
     method = models.TextField(validators=[textfield_not_empty])
     dish_image = CloudinaryField('image', default='placeholder')
     bookmarks = models.ManyToManyField(User, related_name='bookmark', default=None, blank=True)
-    status = models.IntegerField(choice=STATUS, default=0)
+    status = models.IntegerField(choices=STATUS, default=1)
 
     class Meta:
         ordering = ['-created_on']
@@ -30,12 +30,12 @@ class Recipes(models.Model):
 class Comments(models.Model):
     recipe = models.ForeignKey(Recipes,on_delete=models.CASCADE, related_name='comment')
     name = models.CharField(max_length=100)
-    email = models.Email.Field()
+    email = models.EmailField()
     body = models.TextField()
     commented_on = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['created_on']
+        ordering = ['commented_on']
 
     def __str_(self):
         return f"Comment {self.body} by {self.name}"
@@ -53,10 +53,10 @@ class MealPlan(models.Model):
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='meal_plan')
     recipe = models.ForeignKey(Recipes, on_delete=models.CASCADE, related_name='meal_plan_item')
+    day = models.IntegerField(choices=DAY_CHOICE, default='0')
 
     class Meta:
-        order = ['day']
+        ordering = ['day']
 
     def __str__(self):
         return f"Meal Plan for {self.day} by {self.user}"
-
