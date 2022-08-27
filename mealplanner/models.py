@@ -52,4 +52,9 @@ class MealPlan(models.Model):
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='meal_plan')
     recipe = models.ForeignKey(Recipes, on_delete=models.CASCADE, related_name='meal_plan_item')
-    
+
+    class Meta:
+        order = ['day']
+
+    def __str__(self):
+        return f"Meal Plan for {self.day} by {self.user}"
