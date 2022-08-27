@@ -33,4 +33,8 @@ class Comments(models.Model):
     body = models.TextField()
     commented_on = models.DateTimeField(auto_now=True)
 
-    
+    class Meta:
+        ordering = ['created_on']
+
+    def __str_(self):
+        return self.body
