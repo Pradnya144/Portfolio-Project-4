@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
+from .validators import textfield_not_empty
 
 STATUS = ((0, "Draft"), (1, "Publish Now"))
 
@@ -16,7 +17,7 @@ class Recipes(models.Model):
     ingredients = models.TextField(validators=[textfield_not_empty])
     method = models.TextField(validators=[textfield_not_empty])
     dish_image = CloudinaryField('image', default='placeholder')
-    bookmarks = models.ManyToMany(User, related_name='bookmark', default=None, blank=True)
+    bookmarks = models.ManyToManyField(User, related_name='bookmark', default=None, blank=True)
     status = models.IntegerField(choice=STATUS, default=0)
 
     class Meta:
@@ -58,3 +59,4 @@ class MealPlan(models.Model):
 
     def __str__(self):
         return f"Meal Plan for {self.day} by {self.user}"
+
