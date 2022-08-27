@@ -4,6 +4,7 @@ from cloudinary.models import CloudinaryField
 
 STATUS = ((0, "Draft"), (1, "Publish Now"))
 
+
 class Recipes(models.Model):
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
@@ -17,3 +18,12 @@ class Recipes(models.Model):
     dish_image = CloudinaryField('image', default='placeholder')
     bookmarks = models.ManyToMany(User, related_name='bookmark', default=None, blank=True)
     status = models.IntegerField(choice=STATUS, default=0)
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str_(self):
+        return self.title
+
+
+
