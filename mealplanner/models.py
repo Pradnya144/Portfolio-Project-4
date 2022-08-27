@@ -27,7 +27,7 @@ class Recipes(models.Model):
 
 
 class Comments(models.Model):
-    recipe = models.ForeignKey(Recipe,on_delete=models.CASCADE, related_name='comment')
+    recipe = models.ForeignKey(Recipes,on_delete=models.CASCADE, related_name='comment')
     name = models.CharField(max_length=100)
     email = models.Email.Field()
     body = models.TextField()
@@ -37,4 +37,19 @@ class Comments(models.Model):
         ordering = ['created_on']
 
     def __str_(self):
-        return self.body
+        return f"Comment {self.body} by {self.name}"
+
+
+class MealPlan(models.Model):
+    DAY_CHOICE = [
+        (0, "Monday"),
+        (1, "Tuesday"),
+        (3, "Wednesday"),
+        (4, "Thursday"),
+        (5, "Friday"),
+        (6, "Saturday"),
+        (7, "Sunday"),
+    ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='meal_plan')
+    recipe = models.ForeignKey(Recipes, on_delete=models.CASCADE, related_name='meal_plan_item')
+    
