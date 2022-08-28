@@ -164,7 +164,7 @@ class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
         recipes = self.get_object()
         return recipes.author == self.request.user
 
-    def delete(self, request, *args*, **kwargs):
+    def delete(self, request, *args, **kwargs):
 
         messages.success(self.request, self.success_message)
         return super(DeleteRecipe, self).delete(request, *args, **kwargs)
