@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}The CLean Eater | Update Comment{% endblock %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container">
+    <h1 class="page-title">Edit Comment</h1>
+    <hr class="home-break">
+    <br>
+    <div class="row justify-content-center">
+        {% if user.is_authenticated and comments.name == user.username  %}
+        <div class="col-11 col-md-6 col-lg-4 mt-3">
+            <form method="post" class="add-recipe">
+                {{ form | crispy }}
+                {% csrf_token %}
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-dark">Update</button>
+                    <a class="btn btn-outline-dark m-2"
+                        href="{%  url 'recipe_detail' comments.recipes.slug  %}">Cancel</a>
+                </div>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
