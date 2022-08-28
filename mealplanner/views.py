@@ -118,7 +118,7 @@ class AddRecipe(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
 
 class MyRecipes(LoginRequiredMixin, generic.ListView):
 
-    model= Recipes
+    model = Recipes
     template_name = 'my_recipes.html'
     paginate_by = 6
 
@@ -240,12 +240,12 @@ class UpdateComment(
     def test_func(self):
         
         comments = self.get_object()
-        return comment.name == self.request.user.username
+        return comments.name == self.request.user.username
 
     def get_success_url(self):
 
         recipes = self.object.recipe
-        return reverse_lazy('recipe_detail', kwargs={'slug': recipe.slug})
+        return reverse_lazy('recipe_detail', kwargs={'slug': recipes.slug})
 
 
 class DeleteComment(
@@ -268,4 +268,4 @@ class DeleteComment(
     def get_success_url(self):
         
         recipes = self.object.recipe
-        return reverse_lazy('recipe_detail', kwargs={'slug': recipe.slug})
+        return reverse_lazy('recipe_detail', kwargs={'slug': recipes.slug})
