@@ -14,8 +14,135 @@
                 <img src=" {{ recipes.dish_image.url }}" alt="recipe image" class="recipe-detail-img">
                 {% endif %}
             </div>
+            <div class="col-12 col-md-8">
+                <div class="card-body recipe-detail-outer py-2">
+                    <div>
+                        <h1 class="card-title page-title recipe-title text-left">{{ recipes.title }}</h1>
+                    </div>
+                    <p class="card-text">Author: {{ recipes.author }}</p>
+                    <div class="mb-5">
+                        <p>
+                            <span><i class="fa-solid fa-alarm-clock pr-2"></i></span>
+                            <span>Prep Time: {{ recipes.prep_time }}</span>
+                        </p>
+                        <p>
+                            <span><i class="fa-solid fa-alarm-clock pr-2"></i></span>
+                            <span>Cook Time: {{ recipes.cook_time }}</span>
+                        </p>
+                    </div>
+                    <div class="action-buttons-outer d-block">
+                        {% if user.is_authenticated %}
+                        <button type="button" class="btn btn btn-outline-dark mp-button rounded-pill mr-2"
+                                data-toggle="modal" data-target="#mealplanModal">
+                            <span><i class="fa-solid fa-calendar-circle-plus pr-1"></i></span>
+                            Add to Meal Plan
+                        </button>
+                        <div class="modal fade" id="mealplanModal" tabindex="-1" aria-labelledby="mealplanModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="mealplanModalLabel">Select Day</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="post" class="add-recipe">
+                                        <div class="modal-body">
+                                            {{ mealplan_form | crispy }}
+                                            {% csrf_token %}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-outline-dark btn-sm">
+                                                <span><i class="fa-solid fa-calendar-circle-plus pr-1"></i></span>
+                                                Add to Meal Plan
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                        <form class="d-inline" action="{% url 'bookmark_recipe' recipes.slug %}" method="POST">
+                            {% csrf_token %}
+                            {% if bookmarked  %}
+                            <button class="action-btn btn btn-info" type="submit" name="bookmark_id"
+                                value="{{recipes.slug}}" aria-label="bookmark-outline">
+                                <i class="fa-solid fa-bookmark"></i></button>
+                            {% else %}
+                            <button class="action-btn btn btn-info" type="submit" name="bookmark_id"
+                                value="{{recipes.slug}}" aria-label="bookmark-solid">
+                                <i class="fa-solid fa-bookmark"></i></button>
+                            {% endif %}
+                        </form>
+                        {% endif %}
+                        {% if user.is_authenticated and recipes.author == user %}
+                        <span>
+                            <a class="action-btn btn btn-info" href="{% url 'update_recipe' recipes.slug %}" aria-label="edit-recipe">
+                                <i class="fa-duotone fa-pen"></i>
+                            </a>
+                        </span>
+                        <span>
+                            <a class="action-btn btn btn-info" href="{% url 'delete_recipe' recipes.slug %}" aria-label="delete-recipe">
+                                <i class="fa-solid fa-circle-xmark"></i>
+                            </a>
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3 recipe-detail-card">
+                    <h5 class="card-header recipe-detail-header">
+                        Ingrediants
+                    </h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ recipes.ingredients | safe }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-3 recipe-detail-card">
+                    <h5 class="card-header recipe-detail-header">
+                        Method
+                    </h5>
+                    <div class="card-body">
+                        <div class="card-text">{{ recipes.method | safe }}</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
+{% if comments %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card recipe-detail-card">
+                <h3 class="card-header recipe-detail-header text-left">
+                    Comments
+                </h3>
+                <div class="card-body">
+                    {% for comment in comments %}
+                    <div>
+                        <p class="font-weight-bold">
+                            {{ comment.name}}
+                            <span>
+                                
+                            </span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
 {% endblock content %}
