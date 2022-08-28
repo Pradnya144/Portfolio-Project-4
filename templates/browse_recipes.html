@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %} The CLean Eater | All Recipes {% endblock %}
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="page-title">Recipes</h1>
+        </div>
+    </div>
+    <hr class="home-break">
+    <br>
+    <div class="row card-deck">
+        <div class="col-sm-6 col-md-4 col-lg-3 px-1 d-flex align-items-stretch">
+            <div class="card card-detail recipe-card mb-3 shadow-sm mx-auto mx-sm-2">
+                <img src="https://res.cloudinary.com/dqvmztixn/image/upload/v1661693046/images/placeholder_img_jjqxmk.jpg"
+                    class="card-img-top" alt="placeholder image">
+
+                <div class="card-body pb-1">
+                    <h2 class="card-title recipe-detail-title text-truncate">{{ recipes.title }}</h2>
+                    <p class="card-text">
+                        <span><i class="fa-solid fa-alarm-clock pr-2"></i></span>
+                        <span>Cook Time: {{ recipes.cook_time }}</span>
+                    </p>
+                    <a href="{% url 'recipe_detail' recipes.slug %}" class="stretch-link" aria-label="recipe-detail">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
