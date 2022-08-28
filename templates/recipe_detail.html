@@ -1,5 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}The CLean Eater | {{ recipes.title }}{% endblock %}
 {% block content %}
+{% load crispy_forms_tags %}
+
+<div class="container p-0">
+    <div class="container pt-3">
+        <div class="card mb-3 recipe-detail-card">
+            <div class="col-12 col-md-4">
+                {% if "placeholder" in recipes.dish_image.url %}
+                <img class="recipe-detail-img" alt="placeholder image"
+                src="https://res.cloudinary.com/dqvmztixn/image/upload/v1661693046/images/placeholder_img_jjqxmk.jpg">
+                {% else %}
+                <img src=" {{ recipes.dish_image.url }}" alt="recipe image" class="recipe-detail-img">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock content %}
