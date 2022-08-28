@@ -35,3 +35,6 @@ class RecipeDetail(View):
                 "bookmarked": bookmarked
             },
         )
+
+    def post(self, request, slug):
+        queryset = Recipes.objects.filter(status=1)
