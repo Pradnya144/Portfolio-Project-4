@@ -1,5 +1,9 @@
 from django.shortcuts import render, get_object_or_404, reverse
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 from django.views import generic, View
 from .models import Recipes, Comments, MealPlan
 from .forms import CommentForm, RecipeForm, MealPlanForm
@@ -92,3 +96,176 @@ class RecipeDetail(View):
                 "bookmarked": bookmarked
             },
         )
+
+    
+class AddRecipe(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+
+    form_class = RecipeForm
+    template_name = 'add_recipe.html'
+    success_message = "%(calculated_field)s was created successfully"
+
+    def form_valid(self, form):
+
+        return super().form_valid(form)
+
+    def get_success_message(self, cleaned_data):
+
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.title,
+        )
+
+
+class MyRecipes(LoginRequiredMixin, generic.ListView):
+
+    model= Recipes
+    template_name = 'my_recipes.html'
+    paginate_by = 6
+
+    def get_queryset(self):
+
+        return Recipes.objects.filter(author=self.request.user)
+
+
+class UpdateRecipe(LoginRequiredMixin, UserPassesTestMixin,SuccessMessageMixin, generic.UpdateVie):
+
+    model = Recipes
+    form_class = RecipeForm
+    template_name = 'update_recipe.html'
+    success_message = "%(calculated_field)s was edited successfully"
+
+    def form_valid(self, form):
+
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+
+        recipes = self.get_object()
+        return recipes.author == self.request.user
+
+    def get_success_message(self, cleaned_data):
+
+        return self.success_message % dict(
+            cleaned_data,
+            calculated_field=self.object.title,
+        )
+
+
+class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+
+    model = Recipes
+    template_name = 'delete_recipe.html'
+    success_message = "Deletion successful"
+    success_url = reverse_lazy('my_recipies')
+
+    def test_func(self):
+
+        recipes = self.get_object()
+        return recipes.author == self.request.user
+
+    def delete(self, request, *args*, **kwargs):
+
+        messages.success(self.request, self.success_message)
+        return super(DeleteRecipe, self).delete(request, *args, **kwargs)
+
+
+class MyBookmarks(LoginRequiredMixin, generic.ListView):
+    
+    model = Recipes
+    template_name = 'my_bookmarks.html'
+    paginate_by = 6
+
+    def get_queryset(self):
+        
+        return Recipes.objects.filter(bookmarks=self.request.user.id)
+
+
+class BookmarkRecipe(LoginRequiredMixin, View):
+   
+    def post(self, request, slug):
+        
+        recipes = get_object_or_404(Recipes, slug=slug)
+        if recipes.bookmarks.filter(id=request.user.id).exists():
+            recipes.bookmarks.remove(request.user)
+            messages.success(self.request, 'Recipe removed from bookmarks')
+        else:
+            recipes.bookmarks.add(request.user)
+            messages.success(self.request, 'Recipe added to bookmarks')
+
+        return HttpResponseRedirect(reverse('recipe_detail', args=[slug]))
+
+
+class MealPlanning(LoginRequiredMixin, View):
+
+    def get(self, request):
+
+        user_meal_plan_items = MealPlan.objects.filter(user=request.user)
+
+        days = {
+            0: 'Monday',
+            1: 'Tuesday',
+            2: 'Wednesday',
+            3: 'Thursday',
+            4: 'Friday',
+            5: 'Saturday',
+            6: 'Sunday'
+        }
+        mealplan = {}
+
+        for ind, day in days.items():
+            
+            day_meal_plan_item = user_meal_plan_items.filter(day=ind).first()
+            
+            mealplan[day] = day_meal_plan_item or None
+
+        return render(
+            request, 'my_mealplan.html', {'mealplan': mealplan})
+
+
+class UpdateComment(
+        LoginRequiredMixin, UserPassesTestMixin,
+        SuccessMessageMixin, generic.UpdateView):
+
+    model = Comments
+    form_class = CommentForm
+    template_name = 'update_comment.html'
+    success_message = "Comment edited successfully"
+
+    def form_valid(self, form):
+
+        form.instance.name = self.request.user.username
+        return super().form_valid(form)
+
+    def test_func(self):
+        
+        comments = self.get_object()
+        return comment.name == self.request.user.username
+
+    def get_success_url(self):
+
+        recipes = self.object.recipe
+        return reverse_lazy('recipe_detail', kwargs={'slug': recipe.slug})
+
+
+class DeleteComment(
+        LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+
+    model = Comments
+    template_name = 'delete_comment.html'
+    success_message = "Comment deleted successfully"
+
+    def test_func(self):
+        
+        comments = self.get_object()
+        return comments.name == self.request.user.username
+
+    def delete(self, request, *args, **kwargs):
+        
+        messages.success(self.request, self.success_message)
+        return super(DeleteComment, self).delete(request, *args, **kwargs)
+
+    def get_success_url(self):
+        
+        recipes = self.object.recipe
+        return reverse_lazy('recipe_detail', kwargs={'slug': recipe.slug})
