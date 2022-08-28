@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, reverse
+from django.contrib import messages
 from django.views import generic, View
 from .models import Recipes, Comments, MealPlan
+from .forms import CommentForm, RecipeForm, MealPlanForm
 
 class Home(generic.TemplateView):
     template_name = "index.html"
@@ -51,7 +53,7 @@ class RecipeDetail(View):
             comment_form.instance.email = request.user.email
             comment_form.instance.name = request.user.username
             comment = comment_form.save(commit=False)
-            comment.recipe = recipe
+            comment.recipes = recipes
             comment.save()
             messages.success(self.request, 'Comment successfully added')
         else:
@@ -71,7 +73,7 @@ class RecipeDetail(View):
             else:
                 mealplan_item = mealplan_form.save(commit=False)
                 mealplan_item.user = request.user
-                mealplan_item.recipe = recipe
+                mealplan_item.recipes = recipes
                 messages.success(self.request, 'Recipe added to mealplan')
 
                 mealplan_item.save()
@@ -83,7 +85,7 @@ class RecipeDetail(View):
             request,
             "recipe_detail.html",
             {
-                "recipe": recipe,
+                "recipes": recipes,
                 "comments": comments,
                 "comment_form": CommentForm(),
                 "mealplan_form": MealPlanForm(),
