@@ -127,7 +127,7 @@ class MyRecipes(LoginRequiredMixin, generic.ListView):
         return Recipes.objects.filter(author=self.request.user)
 
 
-class UpdateRecipe(LoginRequiredMixin, UserPassesTestMixin,SuccessMessageMixin, generic.UpdateVie):
+class UpdateRecipe(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.UpdateView):
 
     model = Recipes
     form_class = RecipeForm
