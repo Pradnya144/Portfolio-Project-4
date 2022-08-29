@@ -132,17 +132,45 @@
                     {% for comment in comments %}
                     <div>
                         <p class="font-weight-bold">
-                            {{ comment.name}}
-                            <span>
-                                
+                            {{ comments.name}}
+                            <span class=" text-muted font-weight-normal">
+                                {{ comments.commented_on }}
                             </span>
+                            {% if user.is_authenticated and user.username == comments.name %}
+                            <span class="comment-action-btn pl-2">
+                                <a href="{% url 'update_comment' comments.id %}" aria-label="edit-comment">Edit</a>
+                                <a href="{% url 'delete_comment' comments.id %}" aria-label="edit-comment">Delete</a>
+                            </span>
+                            {% endif %}
                         </p>
+                        {{ comments.body | linebreaks }}
+                        <hr>
                     </div>
+                    {% endfor %}
                 </div>
-
             </div>
         </div>
     </div>
-
 </div>
+{% endif %}
+
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="card recipe-detail-card mb-3 mt-3">
+                <div class="card-body">
+                    <p>Leave a comment as: {{ user.username }}</p>
+                    <form method="post">
+                        {{ comment_form | crispy }}
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-dark">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 {% endblock content %}
