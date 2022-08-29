@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+HK:wght@700&family=Oswald:wght@300&family=Roboto:wght@300&display=swap');
+/* font-family: 'Noto Serif HK', serif;
+font-family: 'Oswald', sans-serif;
+font-family: 'Roboto', sans-serif; */
 body {
-    font-family: Montserrat, sans-serif;
+    font-family: 'Noto Serif HK', serif;
     font-weight: 300;
-    background-color: blanchedalmond;
+    background-color: #FFFFD6;
 }
 
 .content {
@@ -42,6 +46,42 @@ body {
 
 .profile-icon {
     padding-right: 5px;
+}
+
+/* Home Page */
+
+.hero-text-outer {
+    background-color: #FFFF85;
+    min-height: 200px;
+}
+
+.hero-text {
+    font-family : 'Roboto', sans-serif;
+    font-size: 50px;
+    color: #271E19;
+}
+
+.home-break {
+    border-top: 1px solid #443730;
+    margin: auto !important;
+}
+
+.feature-image {
+    text-align: center;
+    color: #443730;
+}
+
+.feature-title {
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    color: #443730;
+    padding-top: 10px;
+    text-align: center;
+}
+
+.feature-text {
+    text-align: center;
+    font-size: 17px;
 }
 
 /* Footer */
