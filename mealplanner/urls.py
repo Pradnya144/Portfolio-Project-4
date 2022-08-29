@@ -6,7 +6,7 @@ urlpatterns = [
     path('browserecipes/', views.RecipeList.as_view(), name='browse_recipes'),
     path('myrecipes/', views.MyRecipes.as_view(), name='my_recipes'),
     path('addrecipe/', views.AddRecipe.as_view(), name='add_recipe'),
-    path('mymealplan/', views.MealPlan.as_view(), name='my_mealplan'),
+    path('mymealplan/', views.MealPlanning.as_view(), name='my_mealplan'),
     path(
         'bookmark/<slug:slug>',
         views.BookmarkRecipe.as_view(), name='bookmark_recipe'
