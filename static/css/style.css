@@ -106,7 +106,41 @@ body {
     font-size: 20px;
 }
 
+.recipe-detail-title:first-letter {
+    text-transform: capitalize;
+}
 
+/* Forms */
+
+.signup, .login {
+    text-align: center;
+    padding: 20px 0;
+    border-radius: 2%;
+    border: 1px solid #443730;
+}
+
+.signup input, .login input {
+    width: 90%;
+    border: 1px solid #443730;
+    padding: 5px;
+    margin: 5px 0 10px 0;
+} 
+
+.signup label, .login label {
+    display: block;
+    text-align: center;
+    color: #271E19;
+    font-weight: bold;
+}
+
+.login label[for="id_remember"] {
+    display: inline;
+}
+
+.login #id_remember {
+    width: 20px;
+    display: inline;
+}
 
 /* Footer */
 
