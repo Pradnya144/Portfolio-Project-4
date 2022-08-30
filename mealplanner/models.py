@@ -6,17 +6,18 @@ from .validators import textfield_not_empty
 STATUS = ((0, "Draft"), (1, "Publish Now"))
 
 
-class Recipes(models.Model):
+class Recipe(models.Model):
+
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='post_recipes')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes')
     created_on = models.DateTimeField(auto_now=True)
     updated_on = models.DateTimeField(auto_now=True)
     prep_time = models.CharField(max_length=8, default=0)
     cook_time = models.CharField(max_length=8, default=0)
     ingredients = models.TextField(validators=[textfield_not_empty])
     method = models.TextField(validators=[textfield_not_empty])
-    dish_image = CloudinaryField('image', default='placeholder')
+    image = CloudinaryField('image', default='placeholder')
     bookmarks = models.ManyToManyField(User, related_name='bookmark', default=None, blank=True)
     status = models.IntegerField(choices=STATUS, default=1)
 
@@ -27,21 +28,25 @@ class Recipes(models.Model):
         return self.title
 
 
-class Comments(models.Model):
-    recipe = models.ForeignKey(Recipes,on_delete=models.CASCADE, related_name='comment')
+class Comment(models.Model):
+
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='comment')
     name = models.CharField(max_length=100)
     email = models.EmailField()
     body = models.TextField()
     commented_on = models.DateTimeField(auto_now=True)
 
     class Meta:
+
         ordering = ['commented_on']
 
     def __str_(self):
+
         return f"Comment {self.body} by {self.name}"
 
 
 class MealPlan(models.Model):
+    
     DAY_CHOICE = [
         (0, "Monday"),
         (1, "Tuesday"),
@@ -52,7 +57,7 @@ class MealPlan(models.Model):
         (7, "Sunday"),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='meal_plan')
-    recipe = models.ForeignKey(Recipes, on_delete=models.CASCADE, related_name='meal_plan_item')
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='meal_plan_item')
     day = models.IntegerField(choices=DAY_CHOICE, default='0')
 
     class Meta:
