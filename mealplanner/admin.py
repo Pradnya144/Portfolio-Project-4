@@ -3,7 +3,7 @@ from .models import Recipes, Comments, MealPlan
 from django_summernote.admin import SummernoteModelAdmin
 
 @admin.register(Recipes)
-class RecipesAdmin(SummernoteModelAdmin):
+class RecipeAdmin(SummernoteModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     list_filter = ('status', 'created_on')
     list_display = ('title', 'slug', 'status', 'created_on')
