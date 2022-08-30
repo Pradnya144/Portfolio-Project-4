@@ -110,6 +110,30 @@ body {
     text-transform: capitalize;
 }
 
+/* Add recipes */
+
+.add-recipe input, .add-recipe textarea, .add-recipe select {
+    border: 1px solid #443730;
+}
+
+.add-recipe input[type=file] {
+    border: none !important;
+}
+
+.add-recipe label {
+    color: #443730;
+    font-weight: bold;
+}
+
+.clearablefileinput {
+    color: #443730;
+    border: none
+}
+
+.add-recipe #div_id_image a {
+    color: black !important;
+}
+
 /* Forms */
 
 .signup, .login {
