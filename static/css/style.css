@@ -206,6 +206,30 @@ body {
     display: inline;
 }
 
+/* Meal Plan Page */
+
+.mealplan-card .card-img-top {
+    border-bottom: 1px solid #443730;
+}
+
+.mp-icon {
+    text-align: center;
+    color: #FFFF85;
+    padding-top: 60px;
+}
+
+.mealplan-card-header {
+    background-color: #FFFF85;
+    border-bottom: 1px solid #443730;
+}
+
+.mealplan-title {
+    text-align: center;
+    color: #271E19;
+    font-weight: 300;
+    font-size: 30px;
+}
+
 /* Footer */
 
 
