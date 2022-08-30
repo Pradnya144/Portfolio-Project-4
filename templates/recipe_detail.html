@@ -7,27 +7,27 @@
     <div class="container pt-3">
         <div class="card mb-3 recipe-detail-card">
             <div class="col-12 col-md-4">
-                {% if "placeholder" in recipes.dish_image.url %}
+                {% if "placeholder" in recipe.image.url %}
                 <img class="recipe-detail-img" alt="placeholder image"
                 src="https://res.cloudinary.com/dqvmztixn/image/upload/v1661693046/images/placeholder_img_jjqxmk.jpg">
                 {% else %}
-                <img src=" {{ recipes.dish_image.url }}" alt="recipe image" class="recipe-detail-img">
+                <img src=" {{ recipe.image.url }}" alt="recipe image" class="recipe-detail-img">
                 {% endif %}
             </div>
             <div class="col-12 col-md-8">
                 <div class="card-body recipe-detail-outer py-2">
                     <div>
-                        <h1 class="card-title page-title recipe-title text-left">{{ recipes.title }}</h1>
+                        <h1 class="card-title page-title recipe-title text-left">{{ recipe.title }}</h1>
                     </div>
-                    <p class="card-text">Author: {{ recipes.author }}</p>
+                    <p class="card-text">Author: {{ recipe.author }}</p>
                     <div class="mb-5">
                         <p>
                             <span><i class="fa-solid fa-alarm-clock pr-2"></i></span>
-                            <span>Prep Time: {{ recipes.prep_time }}</span>
+                            <span>Prep Time: {{ recipe.prep_time }}</span>
                         </p>
                         <p>
                             <span><i class="fa-solid fa-alarm-clock pr-2"></i></span>
-                            <span>Cook Time: {{ recipes.cook_time }}</span>
+                            <span>Cook Time: {{ recipe.cook_time }}</span>
                         </p>
                     </div>
                     <div class="action-buttons-outer d-block">
@@ -63,27 +63,27 @@
                         </div>
                         {% endif %}
                         {% if user.is_authenticated %}
-                        <form class="d-inline" action="{% url 'bookmark_recipe' recipes.slug %}" method="POST">
+                        <form class="d-inline" action="{% url 'bookmark_recipe' recipe.slug %}" method="POST">
                             {% csrf_token %}
                             {% if bookmarked  %}
                             <button class="action-btn btn btn-info" type="submit" name="bookmark_id"
-                                value="{{recipes.slug}}" aria-label="bookmark-outline">
+                                value="{{recipe.slug}}" aria-label="bookmark-outline">
                                 <i class="fa-solid fa-bookmark"></i></button>
                             {% else %}
                             <button class="action-btn btn btn-info" type="submit" name="bookmark_id"
-                                value="{{recipes.slug}}" aria-label="bookmark-solid">
+                                value="{{recipe.slug}}" aria-label="bookmark-solid">
                                 <i class="fa-solid fa-bookmark"></i></button>
                             {% endif %}
                         </form>
                         {% endif %}
-                        {% if user.is_authenticated and recipes.author == user %}
+                        {% if user.is_authenticated and recipe.author == user %}
                         <span>
-                            <a class="action-btn btn btn-info" href="{% url 'update_recipe' recipes.slug %}" aria-label="edit-recipe">
+                            <a class="action-btn btn btn-info" href="{% url 'update_recipe' recipe.slug %}" aria-label="edit-recipe">
                                 <i class="fa-duotone fa-pen"></i>
                             </a>
                         </span>
                         <span>
-                            <a class="action-btn btn btn-info" href="{% url 'delete_recipe' recipes.slug %}" aria-label="delete-recipe">
+                            <a class="action-btn btn btn-info" href="{% url 'delete_recipe' recipe.slug %}" aria-label="delete-recipe">
                                 <i class="fa-solid fa-circle-xmark"></i>
                             </a>
                         </span>
@@ -102,7 +102,7 @@
                         Ingrediants
                     </h5>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{{ recipes.ingredients | safe }}</li>
+                        <li class="list-group-item">{{ recipe.ingredients | safe }}</li>
                     </ul>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                         Method
                     </h5>
                     <div class="card-body">
-                        <div class="card-text">{{ recipes.method | safe }}</div>
+                        <div class="card-text">{{ recipe.method | safe }}</div>
                     </div>
                 </div>
             </div>
@@ -132,18 +132,18 @@
                     {% for comment in comments %}
                     <div>
                         <p class="font-weight-bold">
-                            {{ comments.name}}
+                            {{ comment.name}}
                             <span class=" text-muted font-weight-normal">
-                                {{ comments.commented_on }}
+                                {{ comment.commented_on }}
                             </span>
-                            {% if user.is_authenticated and user.username == comments.name %}
+                            {% if user.is_authenticated and user.username == comment.name %}
                             <span class="comment-action-btn pl-2">
                                 <a href="{% url 'update_comment' comments.id %}" aria-label="edit-comment">Edit</a>
                                 <a href="{% url 'delete_comment' comments.id %}" aria-label="edit-comment">Delete</a>
                             </span>
                             {% endif %}
                         </p>
-                        {{ comments.body | linebreaks }}
+                        {{ comment.body | linebreaks }}
                         <hr>
                     </div>
                     {% endfor %}

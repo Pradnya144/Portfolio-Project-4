@@ -8,7 +8,7 @@
     <hr class="home-break">
     <br>
     <div class="row justify-content-center">
-        {% if user.is_authenticated and comments.name == user.username  %}
+        {% if user.is_authenticated and comment.name == user.username  %}
         <div class="col-11 col-md-6 col-lg-4 mt-3">
             <form method="post" class="add-recipe">
                 {{ form | crispy }}
@@ -16,7 +16,7 @@
                 <div class="text-center">
                     <button type="submit" class="btn btn-outline-dark">Update</button>
                     <a class="btn btn-outline-dark m-2"
-                        href="{%  url 'recipe_detail' comments.recipes.slug  %}">Cancel</a>
+                        href="{%  url 'recipe_detail' comment.recipe.slug  %}">Cancel</a>
                 </div>
             </form>
         </div>
