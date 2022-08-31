@@ -97,6 +97,8 @@ The meal plan item model allows users to add recipes to a meal plan for a partic
 ![Database Schema]()  
   
 ## Features  
+
+![Logo](/docs/readme images/logo.jpg)  
   
 ## Technologies  
   
