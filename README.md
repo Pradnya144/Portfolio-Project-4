@@ -93,22 +93,22 @@ Django AllAuth was used for the user authentication system.
 In order for the users to create recipes a custom recipe model was required. The recipe author is a foreign key to the User model given a recipe can only have one author.  
 The Comment model allows users to comment on individual recipes and the Recipe is a foreign key in the comment model given a comment can only be linked to one recipe.  
 The meal plan item model allows users to add recipes to a meal plan for a particular day. A meal plan item can only have one user and one recipe and is therefore linked to the User and Recipe models through foreign keys.  
-
+  
 ![Database Schema]()  
-
+  
 ## Features  
-
+  
 ## Technologies  
-
+  
 ### Languages used  
-
+  
 [HTML5](https://en.wikipedia.org/wiki/HTML5)  
 [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)  
 [Javascript](https://en.wikipedia.org/wiki/JavaScript)  
 [Python](https://www.python.org/)  
-
+  
 ### Frameworks and Libraries  
-
+  
 [Django](https://www.djangoproject.com/): Main python framework used in the development of this project.  
 [Django-allauth](https://django-allauth.readthedocs.io/en/latest/installation.html): authentication library used to create the user accounts.  
 [PostgreSQL](https://www.postgresql.org/) was used as the database for this project.  
@@ -127,3 +127,44 @@ The meal plan item model allows users to add recipes to a meal plan for a partic
 [Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/) used to manage Django Forms.  
 [Cloudinary](https://cloudinary.com/): the image hosting service used to upload images  
 [Bootstrap 4.6](https://getbootstrap.com/docs/4.6/getting-started/introduction/): CSS Framework for developing responsiveness and styling.  
+  
+## Testing  
+  
+## Deployment  
+  
+### Github pages  
+  
+To create a new repository I took the following steps:  
+
+    1. Logged into Github.  
+    2. Clicked over to the ‘repositories’ section.  
+    3. Clicked the green ‘new’ button. This takes you to the create new repository page.  
+    4. Once there under ‘repository template’ I chose the code institute template from the dropdown menu.  
+    5. I input a repository name then clicked the green ‘create repository button’ at the bottom of the page.  
+    6. Once created I opened the new repository and clicked the green ‘Gitpod’ button to create a workspace in Gitpod for editing.  
+
+### Django and Heroku  
+  
+To get the Django framework installed and set up I followed the Code institutes [Django Blog cheatsheet](https://codeinstitute.s3.amazonaws.com/fst/Django%20Blog%20Cheat%20Sheet%20v1.pdf).  
+
+### Forking  
+  
+To fork my project you must:  
+    1. Sign in to Github and go to my [repository](https://github.com/Pradnya144/Portfolio-Project-4)  
+    2. Locate the Fork button at the top right of the page.  
+    3. Select this.   
+    4. The fork is now in your repositories.  
+    
+### Clone  
+
+To clone my project you must:  
+  1. Sign in to Github and go to my [repository](https://github.com/Pradnya144/Portfolio-Project-4)   
+    2. Above the list of files click the green ‘code’ button.  
+    3. This will bring up a few options as to how you would like to clone. You can select HTTPS, SSH or Github CLI, then click the clipboard icon to copy the URL.  
+    4. Open git bash  
+    5. Type ‘git clone’ and then paste the URL you copied. Press Enter.  
+
+    For more information on cloning check out the github documentation https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository  
+
+
+## Credits and Acknowledgements  
