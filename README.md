@@ -168,3 +168,14 @@ To clone my project you must:
 
 
 ## Credits and Acknowledgements  
+
+-The inspiration to this website comes from a mobile app called KptnCook.  
+- [W3Schools](https://www.w3schools.com/)  
+- [Django Docs](https://docs.djangoproject.com/en/4.0/)  
+- [Bootstrap 4.6 Docs](https://getbootstrap.com/docs/4.6/getting-started/introduction/)  
+- [Stack Overflow](https://stackoverflow.com/)  
+- [Pexels](https://www.pexels.com/)  
+- [Update View](https://pytutorial.com/django-updateview-example)  
+- [Pagination](https://docs.djangoproject.com/en/2.2/topics/pagination/#using-paginator-in-a-view)  
+- [Code Institute - I Think before I Blog Walkthrough Project](https://github.com/Code-Institute-Solutions/Django3blog)  
+- [] : Recipe content was sourced from.  
