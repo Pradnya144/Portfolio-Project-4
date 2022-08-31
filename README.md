@@ -13,7 +13,7 @@ Here is a link to the live project [The CLean Eater]()
 * [Design](#Design)  
   * [Colour Scheme](#Colour-Scheme)  
   * [Imagery](#Imagery)  
-  * [Wirefromes](#Wireframes)  
+  * [Wireframes](#Wireframes)  
   * [Database Schema](#Database-Schema)  
 * [Features](#Features)  
   * [Home page](#Home-Page)  
@@ -68,4 +68,31 @@ A visitor to Clean Eater would be someone who likes to share and lookup new reci
 
 #### EPIC | Admin  
 - As a Site Administrator, I can create, read, update and delete recipes, comments and meal plan items so that I can manage the app content.  
+
+## Design  
+
+### Colour Scheme  
+
+I wanted to keep the colour scheme friendly and inviting hence I choose the colour scheme around yellow and earthy tones.  
+Contrast between background and foreground colours is implemented to maintain clear visibility.  
+
+![Colour Palette]()  
+
+### Imagery  
+
+All of the current imagery on the website has been taken from Pelex.  
+The home page displays a family that's cooking together to portray the idea that cooking too can be fun.  
+Images of the dish will be unloaded by individual website users when they upload a new recipe they would like to share.  
+
+### Wireframes  
+
+### Database Schema  
+
+I used principles of Object-Oriented Programming throughout this project and Django’s Class-Based Generic Views.  
+Django AllAuth was used for the user authentication system.  
+In order for the users to create recipes a custom recipe model was required. The recipe author is a foreign key to the User model given a recipe can only have one author.  
+The Comment model allows users to comment on individual recipes and the Recipe is a foreign key in the comment model given a comment can only be linked to one recipe.  
+The meal plan item model allows users to add recipes to a meal plan for a particular day. A meal plan item can only have one user and one recipe and is therefore linked to the User and Recipe models through foreign keys.  
+
+![Database Schema]()  
 
