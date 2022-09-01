@@ -97,8 +97,25 @@ The meal plan item model allows users to add recipes to a meal plan for a partic
 ![Database Schema]()  
   
 ## Features  
+  
+### Home page  
+![Logo](docs/images/logo.jpg)  
+- A customised logo was created using Hatchful by Shopify which is a free logo generator.  
+- This logo is positioned in the top left of the navigation bar. The logo is linked to the home page for ease of navigation for the user.  
 
-![Logo](/docs/readme images/logo.jpg)  
+![Navigation](docs/images/nav1.jpg)  
+![Navigation1](docs/images/nav2.jpg)  
+- The navigation bar is present at the top of every page and includes all links to the various other pages.  
+- The My Account navigation link is a drop down menu which includes the Sign up and Log in links.   
+- When the user has logged in, the My Account drop down menu changes to display the user's name.  
+
+![Feature1](docs/images/feature.jpg)  
+- The home page includes a call to action section which encourages the user to sign up to the site.  
+- If a user is already signed in the message changes to 'Welcome back CLean eater'.  
+- The sign up button changes to a 'Create' button which takes the user to the 'Add recipe' page.  
+
+![Feature2](docs/images/feature2.jpg)  
+ - The 'What can you do' section gives a overview of what the site has to offer and summarizes the features with font awesome icons.  
   
 ## Technologies  
   
