@@ -116,6 +116,8 @@ The meal plan item model allows users to add recipes to a meal plan for a partic
 
 ![Feature2](docs/images/feature2.jpg)  
  - The 'What can you do' section gives a overview of what the site has to offer and summarizes the features with font awesome icons.  
+
+ 
   
 ## Technologies  
   

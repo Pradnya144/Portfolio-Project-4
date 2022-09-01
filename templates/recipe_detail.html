@@ -22,11 +22,11 @@
                     <p class="card-text">Author: {{ recipe.author }}</p>
                     <div class="mb-5">
                         <p>
-                            <span><i class="fa-solid fa-alarm-clock pr-2"></i></span>
+                            <span><i class="far fa-clock pr-2"></i></span>
                             <span>Prep Time: {{ recipe.prep_time }}</span>
                         </p>
                         <p>
-                            <span><i class="fa-solid fa-alarm-clock pr-2"></i></span>
+                            <span><i class="far fa-clock pr-2"></i></span>
                             <span>Cook Time: {{ recipe.cook_time }}</span>
                         </p>
                     </div>
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="submit" class="btn btn-outline-dark btn-sm">
-                                                <span><i class="fa-solid fa-calendar-circle-plus pr-1"></i></span>
+                                                <span><i class="fas fa-calendar-plus pr-1"></i></span>
                                                 Add to Meal Plan
                                             </button>
                                         </div>
@@ -68,23 +68,23 @@
                             {% if bookmarked  %}
                             <button class="action-btn btn btn-info" type="submit" name="bookmark_id"
                                 value="{{recipe.slug}}" aria-label="bookmark-outline">
-                                <i class="fa-solid fa-bookmark"></i></button>
+                                <i class="fas fa-bookmark"></i></button>
                             {% else %}
                             <button class="action-btn btn btn-info" type="submit" name="bookmark_id"
                                 value="{{recipe.slug}}" aria-label="bookmark-solid">
-                                <i class="fa-solid fa-bookmark"></i></button>
+                                <i class="fas fa-bookmark"></i></button>
                             {% endif %}
                         </form>
                         {% endif %}
                         {% if user.is_authenticated and recipe.author == user %}
                         <span>
                             <a class="action-btn btn btn-info" href="{% url 'update_recipe' recipe.slug %}" aria-label="edit-recipe">
-                                <i class="fa-duotone fa-pen"></i>
+                                <i class="fas fa-edit"></i>
                             </a>
                         </span>
                         <span>
                             <a class="action-btn btn btn-info" href="{% url 'delete_recipe' recipe.slug %}" aria-label="delete-recipe">
-                                <i class="fa-solid fa-circle-xmark"></i>
+                                <i class="fas fa-times"></i>
                             </a>
                         </span>
                         {% endif %}
