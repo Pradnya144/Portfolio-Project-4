@@ -11,7 +11,7 @@ STATUS = ((0, "Draft"), (1, "Publish Now"))
 class Recipe(models.Model):
 
     title = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, unique=True)
+    slug = AutoSlugField(populate_from='title', unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes')
     created_on = models.DateTimeField(auto_now=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -25,6 +25,9 @@ class Recipe(models.Model):
 
     class Meta:
         ordering = ['-created_on']
+
+    def get_absolute_url(self):
+        return reverse('recipe_detail', kwargs={'slug': self.slug})
 
     def __str_(self):
         return self.title

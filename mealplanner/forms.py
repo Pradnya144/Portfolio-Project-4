@@ -3,7 +3,6 @@ from django_summernote.widgets import SummernoteWidget
 from .models import Comment, Recipe, MealPlan
 
 
-
 class CommentForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
@@ -21,7 +20,6 @@ class RecipeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(RecipeForm, self).__init__(*args, **kwargs)
         
-
     class Meta:
         
         model = Recipe
