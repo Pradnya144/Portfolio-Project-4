@@ -14,7 +14,6 @@ class Home(generic.TemplateView):
 
 
 class RecipeList(generic.ListView):
-
     model = Recipe
     queryset = Recipe.objects.filter(status=1).order_by('-created_on')
     template_name = 'browse_recipes.html'
@@ -23,8 +22,7 @@ class RecipeList(generic.ListView):
 
 class RecipeDetail(View):
 
-    def get(self, request, slug):
-        
+    def get(self, request, slug):        
         queryset = Recipe.objects.all()
         recipe = get_object_or_404(queryset, slug=slug)
         comments = recipe.comments.order_by('created_on')
@@ -101,8 +99,7 @@ class RecipeDetail(View):
 
     
 class AddRecipe(
-    LoginRequiredMixin, SuccessMessageMixin, 
-    generic.CreateView):
+    LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
 
     form_class = RecipeForm
     template_name = 'add_recipe.html'
@@ -121,7 +118,6 @@ class AddRecipe(
 
 
 class MyRecipes(LoginRequiredMixin, generic.ListView):
-
     model = Recipe
     template_name = 'my_recipes.html'
     paginate_by = 6
@@ -133,8 +129,7 @@ class MyRecipes(LoginRequiredMixin, generic.ListView):
 
 class UpdateRecipe(
     LoginRequiredMixin, UserPassesTestMixin, 
-    SuccessMessageMixin, generic.UpdateView):
-
+      SuccessMessageMixin, generic.UpdateView):
     model = Recipe
     form_class = RecipeForm
     template_name = 'update_recipe.html'
@@ -160,7 +155,6 @@ class UpdateRecipe(
 
 class DeleteRecipe(
     LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
-
     model = Recipe
     template_name = 'delete_recipe.html'
     success_message = "Deletion successful"
@@ -178,7 +172,6 @@ class DeleteRecipe(
 
 
 class MyBookmarks(LoginRequiredMixin, generic.ListView):
-    
     model = Recipe
     template_name = 'my_bookmarks.html'
     paginate_by = 6
@@ -189,9 +182,7 @@ class MyBookmarks(LoginRequiredMixin, generic.ListView):
 
 
 class BookmarkRecipe(LoginRequiredMixin, View):
-   
     def post(self, request, slug):
-        
         recipe = get_object_or_404(Recipe, slug=slug)
         if recipe.bookmarks.filter(id=request.user.id).exists():
             recipe.bookmarks.remove(request.user)
@@ -245,12 +236,10 @@ class UpdateComment(
         return super().form_valid(form)
 
     def test_func(self):
-        
         comment = self.get_object()
         return comment.name == self.request.user.username
 
     def get_success_url(self):
-
         recipe = self.object.recipe
         return reverse_lazy('recipe_detail', kwargs={'slug': recipe.slug})
 
@@ -262,17 +251,14 @@ class DeleteComment(
     template_name = 'delete_comment.html'
     success_message = "Comment deleted successfully"
 
-    def test_func(self):
-        
+    def test_func(self):        
         comment = self.get_object()
         return comment.name == self.request.user.username
 
-    def delete(self, request, *args, **kwargs):
-        
+    def delete(self, request, *args, **kwargs):        
         messages.success(self.request, self.success_message)
         return super(DeleteComment, self).delete(request, *args, **kwargs)
 
-    def get_success_url(self):
-        
+    def get_success_url(self):        
         recipe = self.object.recipe
         return reverse_lazy('recipe_detail', kwargs={'slug': recipe.slug})
