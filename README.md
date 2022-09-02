@@ -76,7 +76,7 @@ A visitor to Clean Eater would be someone who likes to share and lookup new reci
 I wanted to keep the colour scheme friendly and inviting hence I choose the colour scheme around yellow and earthy tones.  
 Contrast between background and foreground colours is implemented to maintain clear visibility.  
 
-![Colour Palette]()  
+![Colour Palette](docs/images/colorpalette.jpg)  
 
 ### Imagery  
 
@@ -117,6 +117,17 @@ The meal plan item model allows users to add recipes to a meal plan for a partic
 ![Feature2](docs/images/feature2.jpg)  
  - The 'What can you do' section gives a overview of what the site has to offer and summarizes the features with font awesome icons.  
 
+ ![Signup](docs/images/signup.jpg)  
+ - New users are directed towards this form for easy sign up.  
+
+![logon](docs/images/login.jpg)  
+- Existing users can login to their account and access all their saved recipes and upload new recipes to the website.  
+
+![addrecipe](docs/images/add_recipe.jpg)  
+-The above form allows a authenticated user to add new recipes onto the website. These recipes will be visible on the page for all users to view.  
+
+![addrecipes](docs/images/add_recipes.jpg)  
+-All the recipes on the page appear in this section.
  
   
 ## Technologies  
@@ -199,4 +210,4 @@ To clone my project you must:
 - [Update View](https://pytutorial.com/django-updateview-example)  
 - [Pagination](https://docs.djangoproject.com/en/2.2/topics/pagination/#using-paginator-in-a-view)  
 - [Code Institute - I Think before I Blog Walkthrough Project](https://github.com/Code-Institute-Solutions/Django3blog)  
-- [] : Recipe content was sourced from.  
+- [BBC Good Food](https://www.bbcgoodfood.com/) : Recipe content was sourced from.  

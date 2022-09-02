@@ -100,7 +100,9 @@ class RecipeDetail(View):
         )
 
     
-class AddRecipe(LoginRequiredMixin, SuccessMessageMixin, generic.CreateView):
+class AddRecipe(
+    LoginRequiredMixin, SuccessMessageMixin, 
+    generic.CreateView):
 
     form_class = RecipeForm
     template_name = 'add_recipe.html'
@@ -129,7 +131,9 @@ class MyRecipes(LoginRequiredMixin, generic.ListView):
         return Recipe.objects.filter(author=self.request.user)
 
 
-class UpdateRecipe(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, generic.UpdateView):
+class UpdateRecipe(
+    LoginRequiredMixin, UserPassesTestMixin, 
+    SuccessMessageMixin, generic.UpdateView):
 
     model = Recipe
     form_class = RecipeForm
@@ -154,7 +158,8 @@ class UpdateRecipe(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin,
         )
 
 
-class DeleteRecipe(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
+class DeleteRecipe(
+    LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
 
     model = Recipe
     template_name = 'delete_recipe.html'

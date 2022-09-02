@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
-from django_extensions.db.fields import AutoSlugField
 from cloudinary.models import CloudinaryField
 from .validators import textfield_not_empty
 
@@ -11,12 +10,12 @@ STATUS = ((0, "Draft"), (1, "Publish Now"))
 class Recipe(models.Model):
 
     title = models.CharField(max_length=100, unique=True)
-    slug = AutoSlugField(populate_from='title', unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipes')
     created_on = models.DateTimeField(auto_now=True)
     updated_on = models.DateTimeField(auto_now=True)
-    prep_time = models.CharField(max_length=8, default=0)
-    cook_time = models.CharField(max_length=8, default=0)
+    prep_time = models.CharField(max_length=10, default=0)
+    cook_time = models.CharField(max_length=10, default=0)
     ingredients = models.TextField(validators=[textfield_not_empty])
     method = models.TextField(validators=[textfield_not_empty])
     image = CloudinaryField('image', default='placeholder')
